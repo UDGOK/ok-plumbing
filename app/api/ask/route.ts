@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { localAnswer } from "@/lib/ask-knowledge";
 
 // Cheap, fast model for a public widget. Override with ASK_AI_MODEL if needed.
 const MODEL = process.env.ASK_AI_MODEL ?? "claude-haiku-4-5-20251001";
@@ -66,10 +67,8 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({
-      answer: `Our AI assistant isn't connected yet — but a real person can help right now. Call ${PHONE_DISPLAY} or send us a message on the contact page.`,
-      fallback: true,
-    });
+    // No LLM configured — answer from the site's own knowledge base.
+    return NextResponse.json({ answer: localAnswer(question), source: "local" });
   }
 
   try {
@@ -89,10 +88,7 @@ export async function POST(req: Request) {
     });
 
     if (!res.ok) {
-      return NextResponse.json({
-        answer: `I couldn't reach the assistant just now. Please call ${PHONE_DISPLAY} and we'll help right away.`,
-        fallback: true,
-      });
+      return NextResponse.json({ answer: localAnswer(question), source: "local" });
     }
 
     const data = await res.json();
@@ -105,14 +101,10 @@ export async function POST(req: Request) {
       : "";
 
     return NextResponse.json({
-      answer:
-        answer ||
-        `I'm not sure on that one — call ${PHONE_DISPLAY} and we'll get you sorted.`,
+      answer: answer || localAnswer(question),
+      source: answer ? "ai" : "local",
     });
   } catch {
-    return NextResponse.json({
-      answer: `Something went wrong on our end. Please call ${PHONE_DISPLAY} for a fast answer.`,
-      fallback: true,
-    });
+    return NextResponse.json({ answer: localAnswer(question), source: "local" });
   }
 }

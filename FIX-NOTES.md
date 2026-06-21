@@ -242,3 +242,22 @@ uses Resend's test sender. `LEAD_EMAIL_TO` defaults to projects@udgok.com.
 **Graceful by design:** if the key is missing or a send fails, the form still shows a positive
 confirmation but routes the visitor to **call (918) 851-8203** instead of falsely claiming delivery —
 so a misconfiguration never silently loses a lead. See `.env.example` for all variables.
+
+---
+
+## Ask AI: smart no-key fallback (fixes the "isn't connected yet" message)
+
+That message appeared because the deployment had no `ANTHROPIC_API_KEY`, so the route had nothing to
+answer with. Two-layer fix:
+
+1. **Local knowledge answerer** (`lib/ask-knowledge.ts`) — a deterministic, API-free responder
+   grounded in the site's own data (services, commercial offerings, hours, service areas, pricing
+   approach, plus emergency and gas-safety handling). The `/api/ask` route now uses it whenever the
+   LLM isn't available — no key, an API error, or an empty response. **The dead-end "isn't connected
+   yet" reply is gone**; visitors always get a relevant answer (responses tag `source: "local"` vs
+   `"ai"`).
+2. **Full LLM answers (optional, richer):** set **`ANTHROPIC_API_KEY`** in Vercel → Settings →
+   Environment Variables, then redeploy. With the key present the widget uses the model and only
+   falls back to the local answerer if a call fails.
+
+So the widget is useful immediately with zero config, and gets smarter the moment you add the key.
