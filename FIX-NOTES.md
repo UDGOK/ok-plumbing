@@ -197,3 +197,27 @@ To break the long single-background scroll, added two sections and reordered:
 - Removed the brass divider; new order: hero → trust bar → services → **dark band** → process →
   **photo strip** → areas → reviews → FAQ → green CTA. Cadence now alternates light / dark / light /
   tinted / green instead of one flat cream run. No new dependencies; SSR + lazy images keep it fast.
+
+---
+
+## Ask AI (footer) + Twenty-style footer redesign
+
+**Ask AI** — `app/api/ask/route.ts` (server route → Anthropic Messages API) +
+`components/footer/ask-ai.tsx` (the footer widget). A visitor types a plumbing question and gets a
+short, OKPlumb-scoped answer with example-question chips.
+
+> **REQUIRED to make it answer:** set **`ANTHROPIC_API_KEY`** in Vercel → Project → Settings →
+> Environment Variables. Optional **`ASK_AI_MODEL`** (default `claude-haiku-4-5-20251001` — cheap &
+> fast). **Without the key it gracefully tells visitors to call (918) 851-8203**, so it never looks
+> broken.
+
+The route is scoped: the system prompt grounds it in OKPlumb's services / area / phone, refuses
+unsafe DIY (gas, venting), and nudges toward booking. It caps input at 500 chars and output at 400
+tokens and has a best-effort in-memory per-IP rate limit (8/min). **For production, back the limit
+with a shared store (e.g. Upstash) and consider a spend cap** — the endpoint is public and every call
+costs API tokens.
+
+**Footer** — `components/layout/site-footer.tsx` rebuilt in a Twenty.com style: near-black
+background, an Ask AI + emergency-call CTA band on top, five tidy link columns (Services, Commercial,
+Service Areas, Company, Legal), Google/Facebook/Reviews pills, a legal row, and an oversized "OKPlumb"
+wordmark bleeding off the bottom edge.
