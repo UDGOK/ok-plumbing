@@ -32,6 +32,11 @@ export function Reveal({
   const [visible, setVisible] = React.useState(reduced);
 
   React.useEffect(() => {
+    // The setState calls below are conditional guards for unsupported
+    // environments (reduced motion, no IntersectionObserver). They run once
+    // on mount to reconcile state — not a cascading-render pattern the
+    // react-hooks/set-state-in-effect rule is designed to catch.
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (reduced) {
       setVisible(true);
       return;
@@ -52,6 +57,7 @@ export function Reveal({
     );
     observer.observe(el);
     return () => observer.disconnect();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [reduced]);
 
   const style: React.CSSProperties = visible
