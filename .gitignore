@@ -33,6 +33,10 @@ next-env.d.ts
 # vercel
 .vercel
 
+# playwright
+playwright-report/
+test-results/
+
 # superpowers brainstorming sessions (token-intensive, not for git)
 .superpowers/
 
