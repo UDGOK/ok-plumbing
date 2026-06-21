@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Parallax } from "@/components/motion/parallax";
 import { Reveal } from "@/components/motion/reveal";
-import { siteConfig } from "@/lib/content";
+import { siteConfig, formatPhone } from "@/lib/content";
 
 export function Hero() {
   return (
@@ -54,7 +54,7 @@ export function Hero() {
               <Button asChild variant="ghost" size="lg">
                 <a href={`tel:${siteConfig.phone}`}>
                   <Phone className="h-4 w-4" />
-                  <span className="ml-2">Call {siteConfig.phone}</span>
+                  <span className="ml-2">Call {formatPhone(siteConfig.phone)}</span>
                 </a>
               </Button>
             </div>

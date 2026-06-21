@@ -26,10 +26,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ok-plumbing.com"),
+  metadataBase: new URL("https://okplumb.com"),
   title: {
-    default: "OK Plumbing — Tulsa's Trusted Plumber",
-    template: "%s · OK Plumbing",
+    default: "OKPlumb — Tulsa's Trusted Plumber",
+    template: "%s · OKPlumb",
   },
   description:
     "Family-owned plumbing for the Tulsa metro. Drain cleaning, water heaters, repipes, leak detection, sewer line, and 24/7 emergency service. Honest work, flat-rate diagnostics.",

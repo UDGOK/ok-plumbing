@@ -41,12 +41,14 @@ export type FaqContext =
   | { type: "contact" };
 
 export const siteConfig = {
-  name: "OK Plumbing",
+  name: "OKPlumb",
   tagline: "Quiet pipes, honest work.",
-  phone: "{{PHONE}}",
-  emergencyPhone: "{{PHONE}}",
-  email: "hello@ok-plumbing.com",
-  url: "https://ok-plumbing.com",
+  phone: "9188518203",
+  emergencyPhone: "9188518203",
+  // email is intentionally omitted from public config — no public email.
+  // All form submissions route to projects@udgok.com via /api/leads (env LEAD_EMAIL_TO).
+  // Internal contact (Umair / umair@udgok.com) is never surfaced to visitors.
+  url: "https://okplumb.com",
   licenseNumber: "{{LICENSE}}",
   yearsInBusiness: "{{YEARS}}",
   serviceAreaRegion: "Tulsa Metro, OK",
@@ -499,4 +501,15 @@ export function getServiceBySlug(slug: string): Service | undefined {
 
 export function getAreaBySlug(slug: string): ServiceArea | undefined {
   return serviceAreas.find((a) => a.slug === slug);
+}
+
+/**
+ * Pretty-print a US phone for display. Accepts 10 or 11 digits (leading 1 stripped).
+ * "9188518203" or "+1 (918) 851-8203" → "(918) 851-8203".
+ * Falls back to the raw string if it doesn't match the expected shape.
+ */
+export function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, "").replace(/^1(\d{10})$/, "$1");
+  const m = digits.match(/^(\d{3})(\d{3})(\d{4})$/);
+  return m ? `(${m[1]}) ${m[2]}-${m[3]}` : raw;
 }

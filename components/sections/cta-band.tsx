@@ -4,7 +4,7 @@ import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/motion/reveal";
-import { siteConfig } from "@/lib/content";
+import { siteConfig, formatPhone } from "@/lib/content";
 
 export function CtaBand() {
   return (
@@ -31,7 +31,7 @@ export function CtaBand() {
             >
               <a href={`tel:${siteConfig.phone}`}>
                 <Phone className="h-4 w-4" />
-                <span className="ml-2">{siteConfig.phone}</span>
+                <span className="ml-2">{formatPhone(siteConfig.phone)}</span>
               </a>
             </Button>
           </div>

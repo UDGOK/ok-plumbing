@@ -12,7 +12,6 @@ interface LocalBusinessLd {
   description: string;
   url: string;
   telephone: string;
-  email: string;
   image: string;
   priceRange: string;
   address: {
@@ -42,7 +41,8 @@ export function localBusinessJsonLd(rating?: RatingInput): LocalBusinessLd {
     description: `${siteConfig.tagline} Family-owned plumbing serving the ${siteConfig.serviceAreaRegion}.`,
     url: siteConfig.url,
     telephone: siteConfig.phone,
-    email: siteConfig.email,
+    // No email in JSON-LD — public email is intentionally not surfaced.
+    // Leads route to projects@udgok.com via the contact form + /api/leads.
     image: `${siteConfig.url}/og-default.png`,
     priceRange: "$$",
     address: {

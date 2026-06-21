@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Container } from "./container";
 import { cn } from "@/lib/utils";
-import { services, serviceAreas, siteConfig } from "@/lib/content";
+import { services, serviceAreas, siteConfig, formatPhone } from "@/lib/content";
 
 const navLinks = [
   { href: "/emergency", label: "Emergency" },
@@ -43,7 +43,7 @@ export function SiteHeader() {
           href="/"
           className="font-display text-2xl font-medium tracking-tight"
         >
-          OK Plumbing
+          OKPlumb
         </Link>
 
         <nav
@@ -116,7 +116,7 @@ export function SiteHeader() {
           <Button asChild variant="ghost" size="sm">
             <a href={`tel:${siteConfig.phone}`}>
               <Phone className="h-4 w-4" />
-              <span className="ml-1">{siteConfig.phone}</span>
+              <span className="ml-1">{formatPhone(siteConfig.phone)}</span>
             </a>
           </Button>
           <Button asChild size="sm">
@@ -178,7 +178,7 @@ export function SiteHeader() {
               <Button asChild>
                 <a href={`tel:${siteConfig.phone}`}>
                   <Phone className="h-4 w-4" />
-                  <span className="ml-2">Call {siteConfig.phone}</span>
+                  <span className="ml-2">Call {formatPhone(siteConfig.phone)}</span>
                 </a>
               </Button>
               <Button asChild variant="outline" onClick={() => setOpen(false)}>

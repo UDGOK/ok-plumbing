@@ -4,14 +4,26 @@ import {
   serviceAreas,
   getFaqForContext,
   siteConfig,
+  formatPhone,
 } from "@/lib/content";
 
-test("siteConfig has required NAP fields (token defaults)", () => {
-  expect(siteConfig.name).toBe("OK Plumbing");
-  expect(siteConfig.phone).toMatch(/^{{PHONE}}$/); // token until intake
-  expect(siteConfig.email).toMatch(/@/);
-  expect(siteConfig.url).toBe("https://ok-plumbing.com");
+test("siteConfig has required NAP fields", () => {
+  expect(siteConfig.name).toBe("OKPlumb");
+  expect(siteConfig.phone).toBe("9188518203");
+  expect(siteConfig.url).toBe("https://okplumb.com");
   expect(siteConfig.serviceAreaRegion).toBe("Tulsa Metro, OK");
+});
+
+test("siteConfig intentionally has no public email field", () => {
+  // Leads route to projects@udgok.com via env (LEAD_EMAIL_TO) — never surfaced.
+  expect((siteConfig as Record<string, unknown>).email).toBeUndefined();
+});
+
+test("formatPhone pretty-prints 10-digit US numbers", () => {
+  expect(formatPhone("9188518203")).toBe("(918) 851-8203");
+  expect(formatPhone("+1 (918) 851-8203")).toBe("(918) 851-8203");
+  // Non-matching input passes through unchanged
+  expect(formatPhone("12345")).toBe("12345");
 });
 
 test("services has exactly 6 entries matching spec §4", () => {

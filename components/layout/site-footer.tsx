@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Container } from "./container";
-import { services, serviceAreas, siteConfig } from "@/lib/content";
+import { services, serviceAreas, siteConfig, formatPhone } from "@/lib/content";
 
 export function SiteFooter() {
   return (
@@ -9,9 +9,7 @@ export function SiteFooter() {
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="font-display text-2xl font-medium">
-              OK Plumbing
-            </div>
+            <div className="font-display text-2xl font-medium">OKPlumb</div>
             <p className="mt-2 text-sm text-foreground-muted">
               {siteConfig.tagline}
             </p>
@@ -66,16 +64,13 @@ export function SiteFooter() {
                   href={`tel:${siteConfig.phone}`}
                   className="hover:text-accent"
                 >
-                  {siteConfig.phone}
+                  {formatPhone(siteConfig.phone)}
                 </a>
               </li>
               <li>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="hover:text-accent"
-                >
-                  {siteConfig.email}
-                </a>
+                <Link href="/contact" className="hover:text-accent">
+                  Send a message
+                </Link>
               </li>
               <li className="text-foreground-muted">{siteConfig.hours}</li>
               <li className="text-foreground-muted">
@@ -88,7 +83,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-foreground-muted sm:flex-row">
           <p>
-            © {new Date().getFullYear()} {siteConfig.name}
+            © {new Date().getFullYear()} OKPlumb
           </p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-accent">

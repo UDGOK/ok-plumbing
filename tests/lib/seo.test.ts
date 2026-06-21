@@ -6,7 +6,7 @@ import {
 } from "@/lib/seo";
 import { siteConfig, getFaqForContext } from "@/lib/content";
 
-test("localBusinessJsonLd contains NAP and geo", () => {
+test("localBusinessJsonLd contains NAP and geo, no email", () => {
   const json = localBusinessJsonLd();
   expect(json["@type"]).toBe("Plumber");
   expect(json.name).toBe(siteConfig.name);
@@ -15,6 +15,8 @@ test("localBusinessJsonLd contains NAP and geo", () => {
   expect(json.geo.latitude).toBe(siteConfig.geo.latitude);
   expect(json.geo.longitude).toBe(siteConfig.geo.longitude);
   expect(json.url).toBe(siteConfig.url);
+  // Public email must never appear in JSON-LD (leads route privately)
+  expect((json as unknown as Record<string, unknown>).email).toBeUndefined();
 });
 
 test("localBusinessJsonLd includes aggregateRating when provided", () => {
