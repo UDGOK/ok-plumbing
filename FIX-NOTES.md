@@ -102,3 +102,25 @@ description rows) — modeled on commure.com but in your Fraunces + brass/green 
 with OKPlumb content. Top-level: **Services / Areas / Company / Emergency**, plus a
 phone link and a green **Book Service** pill. Mobile collapses to a matching sheet.
 No new dependencies; reuses your existing Radix `NavigationMenu` primitives.
+
+---
+
+## Commercial cluster (GEO/SEO build)
+
+New: `lib/commercial.ts` (data), `/commercial` hub + `/commercial/[slug]` (9 sub-pages), a
+**Commercial** mega-menu, and `serviceJsonLd` / `howToJsonLd` helpers in `lib/seo.ts`. Sitemap and
+llms.txt updated. Built the GEO way from the strategy + your slides:
+- **Answer-first** "The short answer" executive summary (40–60 words) at the top of every page.
+- **Structured data**: Service + FAQPage on every page; HowTo on the hub.
+- **Verifiable facts** (EPA 25% grease-trap rule, annual backflow testing) and your real
+  **tenant-improvement / medical-dental build-out** credibility as E-E-A-T.
+- Internal linking via the Commercial mega-menu + hub for topical authority.
+
+Pages: /commercial (hub) + restaurants-commercial-kitchens, tenant-improvement-build-outs,
+medical-dental-offices, property-management, grease-traps, backflow-testing, commercial-water-heaters,
+commercial-drain-hydro-jetting, new-construction.
+
+**Off-page (not code — do these to actually rank):** claim/optimize GBP with a Commercial category +
+real job photos; Bing Places + Apple; review-request + reply habit (4.5★ threshold); list on
+Yelp/Angi/Thumbtack/Downtobid with identical NAP; get mentioned in r/tulsa & a local blog. See
+OKPlumb-Commercial-Ranking-Strategy.md.

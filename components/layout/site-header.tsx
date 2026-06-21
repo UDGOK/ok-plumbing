@@ -16,6 +16,13 @@ import {
   Search,
   Waves,
   Wrench,
+  UtensilsCrossed,
+  Building2,
+  Stethoscope,
+  ClipboardCheck,
+  Trash2,
+  ShieldCheck,
+  HardHat,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,6 +48,7 @@ import {
   formatPhone,
   type IconName,
 } from "@/lib/content";
+import { commercialServices, type CommercialService } from "@/lib/commercial";
 
 const serviceIcon: Record<IconName, React.ElementType> = {
   droplets: Droplets,
@@ -51,6 +59,18 @@ const serviceIcon: Record<IconName, React.ElementType> = {
   wrench: Wrench,
 };
 
+const commercialIcon: Record<CommercialService["icon"], React.ElementType> = {
+  utensils: UtensilsCrossed,
+  build: Building2,
+  medical: Stethoscope,
+  manage: ClipboardCheck,
+  grease: Trash2,
+  backflow: ShieldCheck,
+  heater: Flame,
+  jetting: Droplets,
+  construction: HardHat,
+};
+
 const companyItems = [
   { href: "/about", icon: Info, title: "About", desc: "Family-owned, licensed, insured." },
   { href: "/reviews", icon: Star, title: "Reviews", desc: "What Tulsa homeowners say." },
@@ -59,7 +79,7 @@ const companyItems = [
 ];
 
 const triggerCls =
-  "h-8 rounded-full bg-transparent px-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-foreground-muted hover:bg-surface-muted hover:text-foreground data-open:bg-surface-muted data-open:text-accent data-popup-open:bg-surface-muted data-popup-open:text-accent";
+  "h-8 rounded-full bg-transparent px-3 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-foreground-muted hover:bg-surface-muted hover:text-foreground data-open:bg-surface-muted data-open:text-accent data-popup-open:bg-surface-muted data-popup-open:text-accent";
 
 function PanelHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -193,6 +213,47 @@ export function SiteHeader() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
+              {/* COMMERCIAL */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className={triggerCls}>
+                  Commercial
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-[640px] p-6">
+                    <PanelHeading>Commercial Plumbing</PanelHeading>
+                    <ul className="mt-4 grid grid-cols-2 gap-1">
+                      {commercialServices.map((s) => {
+                        const Icon = commercialIcon[s.icon];
+                        return (
+                          <li key={s.slug}>
+                            <NavigationMenuLink asChild className="rounded-lg p-2.5 hover:bg-surface-muted">
+                              <Link href={`/commercial/${s.slug}`} className="flex items-center gap-2.5">
+                                <span className="flex h-7 w-7 flex-none items-center justify-center rounded-md bg-foreground text-background">
+                                  <Icon className="h-3.5 w-3.5" />
+                                </span>
+                                <span className="text-sm font-medium text-foreground">
+                                  {s.name}
+                                </span>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <div className="mt-4 border-t border-border pt-3">
+                      <NavigationMenuLink asChild className="bg-transparent p-0 hover:bg-transparent">
+                        <Link
+                          href="/commercial"
+                          className="text-sm font-medium text-accent underline-offset-4 hover:underline"
+                        >
+                          All commercial services →
+                        </Link>
+                      </NavigationMenuLink>
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
               {/* AREAS */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={triggerCls}>
@@ -269,7 +330,7 @@ export function SiteHeader() {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
-                  className="inline-flex h-8 items-center rounded-full bg-transparent px-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-accent hover:bg-surface-muted hover:text-accent"
+                  className="inline-flex h-8 items-center rounded-full bg-transparent px-3 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-accent hover:bg-surface-muted hover:text-accent"
                 >
                   <Link href="/emergency">Emergency</Link>
                 </NavigationMenuLink>
@@ -318,6 +379,19 @@ export function SiteHeader() {
                 <Link href="/service-areas" onClick={() => setOpen(false)} className={mobileLink}>
                   Service Areas
                 </Link>
+                <Link href="/commercial" onClick={() => setOpen(false)} className={mobileLink}>
+                  Commercial
+                </Link>
+                {commercialServices.map((s) => (
+                  <Link
+                    key={s.slug}
+                    href={`/commercial/${s.slug}`}
+                    onClick={() => setOpen(false)}
+                    className={cn(mobileLink, "pl-4 text-foreground-muted")}
+                  >
+                    {s.name}
+                  </Link>
+                ))}
                 {companyItems.map((c) => (
                   <Link
                     key={c.href}

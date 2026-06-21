@@ -121,3 +121,60 @@ export function breadcrumbJsonLd(crumbs: Crumb[]) {
     })),
   };
 }
+
+const COMMERCIAL_AREAS = [
+  "Tulsa",
+  "Broken Arrow",
+  "Jenks",
+  "Owasso",
+  "Bixby",
+  "Sand Springs",
+  "Sapulpa",
+  "Claremore",
+  "Catoosa",
+  "Coweta",
+  "Glenpool",
+  "Collinsville",
+];
+
+export function serviceJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: opts.name,
+    name: opts.name,
+    description: opts.description,
+    url: `${siteConfig.url}${opts.path}`,
+    provider: {
+      "@type": "Plumber",
+      name: siteConfig.name,
+      telephone: siteConfig.phone,
+      url: siteConfig.url,
+    },
+    areaServed: COMMERCIAL_AREAS.map((name) => ({
+      "@type": "City",
+      name,
+    })),
+  };
+}
+
+export function howToJsonLd(opts: {
+  name: string;
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.name,
+    step: opts.steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
