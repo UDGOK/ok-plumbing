@@ -90,3 +90,15 @@ OKPlumb job photos — drop files in `public/hero/` and pass them as props:
 ```tsx
 <SpotlightHero problemImage="/hero/problem.jpg" fixedImage="/hero/fixed.jpg" />
 ```
+
+---
+
+## New navigation menu (Commure-style)
+
+`components/layout/site-header.tsx` rewritten into a centered **pill-capsule nav**
+with uppercase tracked labels + chevrons, a slim dark announcement bar, and rich
+**mega-menu panels** (underlined section headings, dark icon-tiles, title + 2-line
+description rows) — modeled on commure.com but in your Fraunces + brass/green tokens
+with OKPlumb content. Top-level: **Services / Areas / Company / Emergency**, plus a
+phone link and a green **Book Service** pill. Mobile collapses to a matching sheet.
+No new dependencies; reuses your existing Radix `NavigationMenu` primitives.
