@@ -183,3 +183,17 @@ Pages without a matching photo keep the themed animation.
 
 **NOTE:** this patch is a **binary** patch — it includes the actual image/video files, so a single
 `git apply` recreates everything. Apply only the latest patch on a clean checkout.
+
+---
+
+## Homepage: color + rhythm pass
+
+To break the long single-background scroll, added two sections and reordered:
+- `components/sections/why-band.tsx` — a bold **dark charcoal** "Why OKPlumb" band (4 value
+  pillars, green icon tiles, brass eyebrow) placed after the services grid for strong mid-scroll
+  contrast.
+- `components/sections/work-strip.tsx` — a homepage **"Recent work"** photo strip (4 real job
+  photos) on a faint green-tinted background (`bg-accent/5`), linking to /commercial.
+- Removed the brass divider; new order: hero → trust bar → services → **dark band** → process →
+  **photo strip** → areas → reviews → FAQ → green CTA. Cadence now alternates light / dark / light /
+  tinted / green instead of one flat cream run. No new dependencies; SSR + lazy images keep it fast.

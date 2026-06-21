@@ -2,12 +2,13 @@ import * as React from "react";
 import { SpotlightHero } from "@/components/sections/spotlight-hero";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { ServicesGrid } from "@/components/sections/services-grid";
+import { WhyBand } from "@/components/sections/why-band";
 import { Process } from "@/components/sections/process";
+import { WorkStrip } from "@/components/sections/work-strip";
 import { AreasTeaser } from "@/components/sections/areas-teaser";
 import { ReviewsPreview } from "@/components/sections/reviews-preview";
 import { GeoFaq } from "@/components/sections/geo-faq";
 import { CtaBand } from "@/components/sections/cta-band";
-import { BrassDivider } from "@/components/layout/brass-divider";
 import { localBusinessJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
@@ -19,8 +20,9 @@ export default function HomePage() {
       />
       <TrustBar />
       <ServicesGrid />
-      <BrassDivider />
+      <WhyBand />
       <Process />
+      <WorkStrip />
       <AreasTeaser />
       <ReviewsPreview />
       <GeoFaq context={{ type: "home" }} />
