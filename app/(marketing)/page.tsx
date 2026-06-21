@@ -13,7 +13,10 @@ import { localBusinessJsonLd } from "@/lib/seo";
 export default function HomePage() {
   return (
     <>
-      <SpotlightHero />
+      <SpotlightHero
+        problemImage="/photos/rough-in-framing.jpg"
+        fixedImage="/photos/commercial-restroom-marble.jpg"
+      />
       <TrustBar />
       <ServicesGrid />
       <BrassDivider />

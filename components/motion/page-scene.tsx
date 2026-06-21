@@ -175,32 +175,36 @@ export function PageScene({
       className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[58%] overflow-hidden [-webkit-mask-image:linear-gradient(to_right,transparent,black_44%)] [mask-image:linear-gradient(to_right,transparent,black_44%)] md:block"
     >
       {photo ? (
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-90"
-          style={{ backgroundImage: `url("${photo}")` }}
-        />
-      ) : null}
-      <svg
-        viewBox="0 0 400 400"
-        preserveAspectRatio="xMidYMid slice"
-        className="absolute right-0 top-1/2 h-[125%] w-auto -translate-y-1/2"
-      >
-        <defs>
-          <radialGradient id="scene-glow-grad" cx="62%" cy="42%" r="62%">
-            <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.16" />
-            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <rect
-          className="scene-glow"
-          x="0"
-          y="0"
-          width="400"
-          height="400"
-          fill="url(#scene-glow-grad)"
-        />
-        <Motif variant={variant} />
-      </svg>
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${photo}")` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-surface/40 via-transparent to-transparent" />
+        </>
+      ) : (
+        <svg
+          viewBox="0 0 400 400"
+          preserveAspectRatio="xMidYMid slice"
+          className="absolute right-0 top-1/2 h-[125%] w-auto -translate-y-1/2"
+        >
+          <defs>
+            <radialGradient id="scene-glow-grad" cx="62%" cy="42%" r="62%">
+              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.16" />
+              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect
+            className="scene-glow"
+            x="0"
+            y="0"
+            width="400"
+            height="400"
+            fill="url(#scene-glow-grad)"
+          />
+          <Motif variant={variant} />
+        </svg>
+      )}
     </div>
   );
 }

@@ -153,3 +153,33 @@ stands on its own so no page looks empty.
 To dial the motion up/down, adjust opacity/size in `page-scene.tsx` or the `scene-*` keyframes.
 
 `offers` page fleshed out with a "what you can finance" + "how it works" block.
+
+---
+
+## Real job photos + med-gas video (first-party E-E-A-T)
+
+Added 9 optimized photos to `public/photos/` and a med-gas clip to `public/video/`
+(`med-gas-rough-in.mp4` + `med-gas-poster.jpg`). All resized to ≤1400px / progressive JPEG
+(~55–315KB each, ~2MB total) so they're web-fast.
+
+**Where they're used**
+- **Homepage spotlight hero** — real before/after: `rough-in-framing.jpg` (problem) →
+  `commercial-restroom-marble.jpg` (revealed on hover).
+- **Hero photo accents** (right-side, replaces the animation on these pages):
+  backflow → `backflow-preventer.jpg`; tenant-improvement → `commercial-build-out.jpg`;
+  new-construction & sewer-line & hydro-jetting → `commercial-dwv-rough-in.jpg`;
+  medical-dental → `ada-restroom-shower.jpg`; property-management →
+  `commercial-restroom-marble.jpg`; repiping → `copper-water-rough-in.jpg`;
+  fixtures → `brass-console-sink.jpg`.
+- **Commercial hub "Recent work" gallery** — 8-photo grid.
+- **Medical/dental page** — autoplay/muted/looped med-gas video block (tiny, 309KB).
+
+Pages without a matching photo keep the themed animation.
+
+**Add or swap photos:** drop a file in `public/photos/`, then either pass it via a hero
+(`<PageScene variant="..." photo="/photos/your.jpg" />` or add to the `servicePhoto` /
+`commercialPhoto` maps in the `[slug]` pages) or add it to the `work` array in
+`app/(marketing)/commercial/page.tsx` for the gallery. More real job photos = more ranking/trust.
+
+**NOTE:** this patch is a **binary** patch — it includes the actual image/video files, so a single
+`git apply` recreates everything. Apply only the latest patch on a clean checkout.

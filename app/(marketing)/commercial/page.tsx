@@ -65,6 +65,17 @@ export default function CommercialHubPage() {
     { name: "Documented closeout", text: "You get itemized invoicing and service records — inspection-ready for your files." },
   ];
 
+  const work = [
+    { src: "/photos/commercial-build-out.jpg", alt: "Commercial tenant build-out framing" },
+    { src: "/photos/copper-water-rough-in.jpg", alt: "Copper domestic water rough-in" },
+    { src: "/photos/commercial-dwv-rough-in.jpg", alt: "Cast-iron DWV rough-in" },
+    { src: "/photos/backflow-preventer.jpg", alt: "Backflow preventer installation" },
+    { src: "/photos/ada-restroom-shower.jpg", alt: "ADA restroom build-out" },
+    { src: "/photos/commercial-restroom-marble.jpg", alt: "Finished commercial restroom" },
+    { src: "/photos/commercial-restroom-grey.jpg", alt: "Finished ADA restroom" },
+    { src: "/photos/brass-console-sink.jpg", alt: "Brass console sink & P-trap" },
+  ];
+
   return (
     <>
       {/* Hero + answer-first executive summary */}
@@ -202,6 +213,44 @@ export default function CommercialHubPage() {
           ))}
         </div>
       </Container>
+
+      {/* Recent work */}
+      <section className="border-t border-border py-16 md:py-20">
+        <Container>
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+              Recent work
+            </p>
+            <h2 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)] font-medium tracking-tight">
+              Real commercial jobs, real results.
+            </h2>
+            <p className="mt-4 max-w-2xl text-foreground-muted">
+              From rough-in to finished space — a look at recent OKPlumb
+              commercial and tenant-improvement work across the Tulsa metro.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+            {work.map((w, i) => (
+              <Reveal key={w.src} index={i % 4}>
+                <figure className="group overflow-hidden rounded-lg border border-border">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={w.src}
+                      alt={w.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption className="px-3 py-2 text-xs text-foreground-muted">
+                    {w.alt}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       {/* FAQ */}
       <section className="border-t border-border py-16 md:py-24">

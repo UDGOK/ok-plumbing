@@ -48,6 +48,15 @@ const commercialScene: Record<string, SceneVariant> = {
   construction: "blueprint",
 };
 
+const commercialPhoto: Record<string, string> = {
+  "backflow-testing": "/photos/backflow-preventer.jpg",
+  "tenant-improvement-build-outs": "/photos/commercial-build-out.jpg",
+  "new-construction": "/photos/commercial-dwv-rough-in.jpg",
+  "medical-dental-offices": "/photos/ada-restroom-shower.jpg",
+  "property-management": "/photos/commercial-restroom-marble.jpg",
+  "commercial-drain-hydro-jetting": "/photos/commercial-dwv-rough-in.jpg",
+};
+
 export default async function CommercialServicePage({
   params,
 }: {
@@ -62,7 +71,7 @@ export default async function CommercialServicePage({
   return (
     <>
       <section className="relative overflow-hidden border-b border-border bg-surface">
-        <PageScene variant={commercialScene[service.icon] ?? "pipes"} />
+        <PageScene variant={commercialScene[service.icon] ?? "pipes"} photo={commercialPhoto[service.slug]} />
         <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <Link
@@ -147,6 +156,43 @@ export default async function CommercialServicePage({
           </Reveal>
         </div>
       </Container>
+
+      {service.slug === "medical-dental-offices" ? (
+        <section className="border-t border-border bg-surface py-16 md:py-20">
+          <Container>
+            <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
+              <Reveal>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+                  From our jobsite
+                </p>
+                <h2 className="mt-3 font-display text-[clamp(1.6rem,3.5vw,2.4rem)] font-medium">
+                  Medical gas, done right.
+                </h2>
+                <p className="mt-4 text-foreground-muted">
+                  Brazed copper med-gas lines, certified installation, and
+                  code-compliant rough-in for operatories and sterile areas —
+                  real work from an OKPlumb medical build-out.
+                </p>
+              </Reveal>
+              <Reveal index={1}>
+                <div className="overflow-hidden rounded-xl border border-border bg-foreground">
+                  <video
+                    className="h-full w-full"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    poster="/photos/med-gas-poster.jpg"
+                  >
+                    <source src="/video/med-gas-rough-in.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* FAQ */}
       <section className="border-t border-border py-16 md:py-24">

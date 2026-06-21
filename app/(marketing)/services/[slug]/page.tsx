@@ -36,6 +36,12 @@ const serviceScene: Record<string, SceneVariant> = {
   wrench: "pipes",
 };
 
+const servicePhoto: Record<string, string> = {
+  repiping: "/photos/copper-water-rough-in.jpg",
+  fixtures: "/photos/brass-console-sink.jpg",
+  "sewer-line": "/photos/commercial-dwv-rough-in.jpg",
+};
+
 export default async function ServicePage({
   params,
 }: {
@@ -48,7 +54,7 @@ export default async function ServicePage({
   return (
     <>
       <section className="relative overflow-hidden border-b border-border bg-surface">
-        <PageScene variant={serviceScene[service.iconName] ?? "water"} />
+        <PageScene variant={serviceScene[service.iconName] ?? "water"} photo={servicePhoto[service.slug]} />
         <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
