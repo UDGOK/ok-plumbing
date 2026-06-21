@@ -5,8 +5,37 @@ interface RatingInput {
   reviewCount: number;
 }
 
-export function localBusinessJsonLd(rating?: RatingInput) {
-  const base = {
+interface LocalBusinessLd {
+  "@context": string;
+  "@type": string;
+  name: string;
+  description: string;
+  url: string;
+  telephone: string;
+  email: string;
+  image: string;
+  priceRange: string;
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  geo: { "@type": string; latitude: number; longitude: number };
+  areaServed: string[];
+  openingHours: string;
+  sameAs: string[];
+  aggregateRating?: {
+    "@type": string;
+    ratingValue: string;
+    reviewCount: number;
+  };
+}
+
+export function localBusinessJsonLd(rating?: RatingInput): LocalBusinessLd {
+  const base: LocalBusinessLd = {
     "@context": "https://schema.org",
     "@type": "Plumber",
     name: siteConfig.name,

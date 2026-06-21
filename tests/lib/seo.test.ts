@@ -19,8 +19,9 @@ test("localBusinessJsonLd contains NAP and geo", () => {
 
 test("localBusinessJsonLd includes aggregateRating when provided", () => {
   const json = localBusinessJsonLd({ ratingValue: "4.9", reviewCount: 127 });
-  expect(json.aggregateRating.ratingValue).toBe("4.9");
-  expect(json.aggregateRating.reviewCount).toBe(127);
+  expect(json.aggregateRating).toBeDefined();
+  expect(json.aggregateRating!.ratingValue).toBe("4.9");
+  expect(json.aggregateRating!.reviewCount).toBe(127);
 });
 
 test("faqPageJsonLd maps FAQ array correctly", () => {
