@@ -185,3 +185,25 @@
     mask-image: none;
   }
 }
+
+/* ---- Page scene motifs: performance-safe themed motion (SSR, GPU-cheap) ---- */
+/* Disabled automatically by the prefers-reduced-motion backstop above. */
+.scene-glow { animation: scene-glow 6s ease-in-out infinite; transform-origin: center; }
+@keyframes scene-glow { 0%,100% { opacity: .45 } 50% { opacity: .8 } }
+.scene-drop { animation: scene-drop 2.6s ease-in infinite; }
+@keyframes scene-drop { 0% { transform: translateY(-20px); opacity: 0 } 15% { opacity: 1 } 80% { opacity: 1 } 100% { transform: translateY(230px); opacity: 0 } }
+.scene-ripple { transform-box: fill-box; transform-origin: center; animation: scene-ripple 3s ease-out infinite; }
+@keyframes scene-ripple { 0% { transform: scale(.25); opacity: .6 } 100% { transform: scale(1.7); opacity: 0 } }
+.scene-rise { animation: scene-rise 3.4s ease-in infinite; }
+@keyframes scene-rise { 0% { transform: translateY(40px) scale(.8); opacity: 0 } 25% { opacity: .9 } 100% { transform: translateY(-70px) scale(1.1); opacity: 0 } }
+.scene-needle { transform-box: fill-box; transform-origin: bottom center; animation: scene-needle 4s ease-in-out infinite; }
+@keyframes scene-needle { 0%,100% { transform: rotate(-50deg) } 50% { transform: rotate(50deg) } }
+.scene-draw { stroke-dasharray: 620; stroke-dashoffset: 620; animation: scene-draw 4.5s ease-in-out infinite alternate; }
+@keyframes scene-draw { to { stroke-dashoffset: 0 } }
+.scene-pulse { transform-box: fill-box; transform-origin: center; animation: scene-pulse 3s ease-out infinite; }
+@keyframes scene-pulse { 0% { transform: scale(.3); opacity: .7 } 100% { transform: scale(1.55); opacity: 0 } }
+.scene-flow { stroke-dasharray: 14 22; animation: scene-flow 1.6s linear infinite; }
+@keyframes scene-flow { to { stroke-dashoffset: -72 } }
+.scene-float { animation: scene-float 5s ease-in-out infinite; }
+@keyframes scene-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-9px) } }
+.d1 { animation-delay: .4s } .d2 { animation-delay: .8s } .d3 { animation-delay: 1.2s } .d4 { animation-delay: 1.6s } .d5 { animation-delay: 2s }

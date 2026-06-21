@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/container";
+import { PageScene } from "@/components/motion/page-scene";
 import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { services } from "@/lib/content";
@@ -16,8 +17,9 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b border-border bg-surface">
-        <Container className="py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-border bg-surface">
+        <PageScene variant="water" />
+        <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
               What we do

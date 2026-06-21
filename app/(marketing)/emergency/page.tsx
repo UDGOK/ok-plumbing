@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, Clock, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/container";
+import { PageScene } from "@/components/motion/page-scene";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { GeoFaq } from "@/components/sections/geo-faq";
@@ -35,8 +36,9 @@ const steps = [
 export default function EmergencyPage() {
   return (
     <>
-      <section className="border-b border-border bg-surface">
-        <Container className="py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-border bg-surface">
+        <PageScene variant="pulse" />
+        <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
               24/7 Emergency Line

@@ -124,3 +124,32 @@ commercial-drain-hydro-jetting, new-construction.
 real job photos; Bing Places + Apple; review-request + reply habit (4.5★ threshold); list on
 Yelp/Angi/Thumbtack/Downtobid with identical NAP; get mentioned in r/tulsa & a local blog. See
 OKPlumb-Commercial-Ranking-Strategy.md.
+
+---
+
+## Page-specific themed motion + photo slots
+
+New component `components/motion/page-scene.tsx` — a server-rendered, pure SVG/CSS decorative
+"scene" anchored to the right of each page hero. **No WebGL, no Three.js, no per-frame JS**, so it
+adds ~nothing to load time and is auto-disabled by the existing `prefers-reduced-motion` backstop in
+`globals.css`. Eight variants, mapped to page type:
+
+- `water` (drains, contact, services hub) · `flame` (water heaters) · `gauge` (backflow)
+- `blueprint` (build-outs, new construction, about) · `radar` (leak detection, medical/dental)
+- `flow` (sewer, hydro-jetting, grease, restaurants) · `pulse` (emergency) · `pipes` (brand default)
+
+Dynamic routes pick a variant from the service icon (`serviceScene` / `commercialScene` maps in the
+`[slug]` pages). Keyframes live in `globals.css` under "Page scene motifs".
+
+**Adding real photos (recommended for trust + ranking).** Each scene accepts an optional `photo`
+prop. Drop a real OKPlumb job photo in `public/hero/` and pass it, e.g.:
+
+    <PageScene variant="flow" photo="/hero/restaurant-kitchen.jpg" />
+
+The photo layers behind the motif with the same right-side fade. Real job photos are the single
+biggest E-E-A-T lever you control — far better than stock. Until you add them, the themed motion
+stands on its own so no page looks empty.
+
+To dial the motion up/down, adjust opacity/size in `page-scene.tsx` or the `scene-*` keyframes.
+
+`offers` page fleshed out with a "what you can finance" + "how it works" block.

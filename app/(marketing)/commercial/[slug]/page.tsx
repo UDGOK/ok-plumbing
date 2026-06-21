@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Container } from "@/components/layout/container";
+import { PageScene, type SceneVariant } from "@/components/motion/page-scene";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -35,6 +36,18 @@ export async function generateMetadata({
   };
 }
 
+const commercialScene: Record<string, SceneVariant> = {
+  utensils: "flow",
+  build: "blueprint",
+  medical: "radar",
+  manage: "pipes",
+  grease: "flow",
+  backflow: "gauge",
+  heater: "flame",
+  jetting: "water",
+  construction: "blueprint",
+};
+
 export default async function CommercialServicePage({
   params,
 }: {
@@ -48,8 +61,9 @@ export default async function CommercialServicePage({
 
   return (
     <>
-      <section className="border-b border-border bg-surface">
-        <Container className="py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-border bg-surface">
+        <PageScene variant={commercialScene[service.icon] ?? "pipes"} />
+        <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <Link
               href="/commercial"

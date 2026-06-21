@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, MessageSquare, Clock, MapPin } from "lucide-react";
 import { Container } from "@/components/layout/container";
+import { PageScene } from "@/components/motion/page-scene";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { GeoFaq } from "@/components/sections/geo-faq";
@@ -25,8 +26,9 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="border-b border-border bg-surface">
-        <Container className="py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-border bg-surface">
+        <PageScene variant="water" />
+        <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
               Get in touch

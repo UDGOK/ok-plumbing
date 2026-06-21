@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { Container } from "@/components/layout/container";
+import { PageScene, type SceneVariant } from "@/components/motion/page-scene";
 import { Reveal } from "@/components/motion/reveal";
 import { GeoFaq } from "@/components/sections/geo-faq";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -26,6 +27,15 @@ export async function generateMetadata({
   };
 }
 
+const serviceScene: Record<string, SceneVariant> = {
+  droplets: "water",
+  flame: "flame",
+  "git-branch": "pipes",
+  search: "radar",
+  waves: "flow",
+  wrench: "pipes",
+};
+
 export default async function ServicePage({
   params,
 }: {
@@ -37,8 +47,9 @@ export default async function ServicePage({
 
   return (
     <>
-      <section className="border-b border-border bg-surface">
-        <Container className="py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-border bg-surface">
+        <PageScene variant={serviceScene[service.iconName] ?? "water"} />
+        <Container className="relative z-10 py-16 md:py-20">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
               Service
