@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/content";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -26,7 +27,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://okplumb.com"),
+  metadataBase: new URL(siteConfig.url),
+  alternates: { canonical: "/" },
   title: {
     default: "OKPlumb — Tulsa's Trusted Plumber",
     template: "%s · OKPlumb",

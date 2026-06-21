@@ -48,21 +48,21 @@ export const siteConfig = {
   // email is intentionally omitted from public config — no public email.
   // All form submissions route to projects@udgok.com via /api/leads (env LEAD_EMAIL_TO).
   // Internal contact (Umair / umair@udgok.com) is never surfaced to visitors.
-  url: "https://okplumb.com",
-  licenseNumber: "{{LICENSE}}",
-  yearsInBusiness: "{{YEARS}}",
+  url: "https://www.ok-plumbing.com",
+  licenseNumber: process.env.NEXT_PUBLIC_LICENSE_NUMBER ?? "",
+  yearsInBusiness: process.env.NEXT_PUBLIC_YEARS ?? "",
   serviceAreaRegion: "Tulsa Metro, OK",
   hours: "Mon–Fri 7a–6p · Emergency 24/7",
   address: {
-    street: "{{STREET}}",
+    street: process.env.NEXT_PUBLIC_STREET ?? "",
     city: "Tulsa",
     state: "OK",
-    zip: "{{ZIP}}",
+    zip: process.env.NEXT_PUBLIC_ZIP ?? "",
   },
   geo: { latitude: 36.154, longitude: -95.9928 },
   social: {
-    google: "{{GOOGLE_BIZ_URL}}",
-    facebook: "{{FACEBOOK_URL}}",
+    google: process.env.NEXT_PUBLIC_GOOGLE_BIZ_URL ?? "",
+    facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "",
   },
 } as const;
 
@@ -246,7 +246,7 @@ const homeFaqs: Faq[] = [
   },
   {
     question: "Are you licensed and insured in Oklahoma?",
-    answer: `Yes — Oklahoma plumbing license ${siteConfig.licenseNumber}, fully insured, and ${siteConfig.yearsInBusiness} serving the Tulsa area.`,
+    answer: `Yes — ${siteConfig.licenseNumber ? `Oklahoma plumbing license ${siteConfig.licenseNumber}, ` : ""}fully licensed and insured in Oklahoma${siteConfig.yearsInBusiness ? `, ${siteConfig.yearsInBusiness}` : ", serving the Tulsa metro"}.`,
   },
   {
     question: "Do you work on tankless water heaters?",

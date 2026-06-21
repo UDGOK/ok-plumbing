@@ -159,3 +159,29 @@
     transform: translateX(-50%);
   }
 }
+
+/* Spotlight hero reveal mask (components/sections/spotlight-hero.tsx) */
+.spotlight-mask {
+  --mx: 50%;
+  --my: 45%;
+  -webkit-mask-image: radial-gradient(
+    circle 240px at var(--mx) var(--my),
+    #000 0%,
+    #000 36%,
+    rgba(0, 0, 0, 0.35) 62%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    circle 240px at var(--mx) var(--my),
+    #000 0%,
+    #000 36%,
+    rgba(0, 0, 0, 0.35) 62%,
+    transparent 78%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-mask {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}

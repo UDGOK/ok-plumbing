@@ -7,7 +7,7 @@ const items = [
   { icon: ShieldCheck, label: "Licensed & Insured" },
   { icon: Star, label: "5-Star Google Rated" },
   { icon: Clock, label: "24/7 Emergency Service" },
-  { icon: Wrench, label: `${siteConfig.yearsInBusiness} Serving Tulsa` },
+  { icon: Wrench, label: siteConfig.yearsInBusiness || "Serving the Tulsa Metro" },
   { icon: ShieldCheck, label: "Flat-Rate Pricing" },
   { icon: Star, label: "Family Owned" },
 ];

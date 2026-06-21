@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Hero } from "@/components/sections/hero";
+import { SpotlightHero } from "@/components/sections/spotlight-hero";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { ServicesGrid } from "@/components/sections/services-grid";
 import { Process } from "@/components/sections/process";
@@ -13,7 +13,7 @@ import { localBusinessJsonLd } from "@/lib/seo";
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <SpotlightHero />
       <TrustBar />
       <ServicesGrid />
       <BrassDivider />

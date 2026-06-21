@@ -14,7 +14,7 @@ export function SiteFooter() {
               {siteConfig.tagline}
             </p>
             <p className="mt-4 text-xs text-foreground-muted">
-              License {siteConfig.licenseNumber} · {siteConfig.yearsInBusiness}
+              {[siteConfig.licenseNumber ? `License ${siteConfig.licenseNumber}` : "Licensed & insured", siteConfig.yearsInBusiness].filter(Boolean).join(" · ")}
             </p>
           </div>
 
@@ -74,8 +74,7 @@ export function SiteFooter() {
               </li>
               <li className="text-foreground-muted">{siteConfig.hours}</li>
               <li className="text-foreground-muted">
-                {siteConfig.address.street}, {siteConfig.address.city},{" "}
-                {siteConfig.address.state}
+                {[siteConfig.address.street, siteConfig.address.city, siteConfig.address.state].filter(Boolean).join(", ")}
               </li>
             </ul>
           </div>

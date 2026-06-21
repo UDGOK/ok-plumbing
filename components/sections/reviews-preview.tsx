@@ -3,14 +3,16 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/motion/reveal";
+import { siteConfig } from "@/lib/content";
 
-// Phase 1: static curated fallback. Phase 4 swaps in live Google reviews
-// via lib/reviews.ts (Places API). Component shape stays the same.
-const fallbackReviews = [
-  { name: "Sarah M.", city: "Tulsa", rating: 5, body: "{{REVIEW_1}}" },
-  { name: "David R.", city: "Broken Arrow", rating: 5, body: "{{REVIEW_2}}" },
-  { name: "Jenni P.", city: "Jenks", rating: 5, body: "{{REVIEW_3}}" },
-];
+// Paste REAL, verbatim Google reviews here when you have them.
+// Leave this empty until then — never invent testimonials.
+const rawReviews: { name: string; city: string; rating: number; body: string }[] =
+  [
+    // { name: "Sarah M.", city: "Tulsa", rating: 5, body: "Exact review text…" },
+  ];
+
+const reviews = rawReviews.filter((r) => r.body.trim().length > 0);
 
 export function ReviewsPreview() {
   return (
@@ -25,42 +27,69 @@ export function ReviewsPreview() {
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {fallbackReviews.map((review, i) => (
-            <Reveal key={i} index={i}>
-              <figure className="flex h-full flex-col rounded-lg border border-border bg-background p-6">
-                <div
-                  className="flex gap-0.5"
-                  aria-label={`${review.rating} out of 5 stars`}
-                >
-                  {Array.from({ length: review.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-brass text-brass" />
-                  ))}
-                </div>
-                <blockquote className="mt-4 flex-1 text-foreground-muted">
-                  &ldquo;{review.body}&rdquo;
-                </blockquote>
-                <figcaption className="mt-4 text-sm">
-                  <span className="font-medium text-foreground">
-                    {review.name}
-                  </span>
-                  <span className="text-foreground-muted">
-                    {" "}
-                    · {review.city}
-                  </span>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
+        {reviews.length === 0 ? (
+          <Reveal index={1} className="mt-10">
+            <div className="rounded-lg border border-border bg-background p-8 text-center">
+              <div
+                className="flex justify-center gap-0.5"
+                aria-hidden="true"
+              >
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <Star key={j} className="h-5 w-5 fill-brass text-brass" />
+                ))}
+              </div>
+              <p className="mx-auto mt-4 max-w-md text-foreground-muted">
+                We let the work speak. Read verified reviews from Tulsa
+                homeowners on our Google Business profile.
+              </p>
+            </div>
+          </Reveal>
+        ) : (
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {reviews.map((review, i) => (
+              <Reveal key={i} index={i}>
+                <figure className="flex h-full flex-col rounded-lg border border-border bg-background p-6">
+                  <div
+                    className="flex gap-0.5"
+                    aria-label={`${review.rating} out of 5 stars`}
+                  >
+                    {Array.from({ length: review.rating }).map((_, j) => (
+                      <Star key={j} className="h-4 w-4 fill-brass text-brass" />
+                    ))}
+                  </div>
+                  <blockquote className="mt-4 flex-1 text-foreground-muted">
+                    &ldquo;{review.body}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-4 text-sm">
+                    <span className="font-medium text-foreground">
+                      {review.name}
+                    </span>
+                    <span className="text-foreground-muted"> · {review.city}</span>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        )}
 
         <Reveal className="mt-10">
-          <Link
-            href="/reviews"
-            className="inline-block border-b-2 border-brass pb-1 font-medium hover:text-accent"
-          >
-            Read all reviews →
-          </Link>
+          {siteConfig.social.google ? (
+            <a
+              href={siteConfig.social.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block border-b-2 border-brass pb-1 font-medium hover:text-accent"
+            >
+              Read all reviews on Google →
+            </a>
+          ) : (
+            <Link
+              href="/reviews"
+              className="inline-block border-b-2 border-brass pb-1 font-medium hover:text-accent"
+            >
+              Read all reviews →
+            </Link>
+          )}
         </Reveal>
       </Container>
     </section>

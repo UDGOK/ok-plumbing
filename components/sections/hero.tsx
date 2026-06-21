@@ -27,7 +27,7 @@ export function Hero() {
         <div className="max-w-3xl">
           <Reveal index={0}>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">
-              Tulsa&apos;s Trusted Plumber · Est. {siteConfig.yearsInBusiness}
+              Tulsa&apos;s Trusted Plumber{siteConfig.yearsInBusiness ? ` · ${siteConfig.yearsInBusiness}` : ""}
             </p>
           </Reveal>
 

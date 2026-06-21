@@ -43,7 +43,7 @@ export function localBusinessJsonLd(rating?: RatingInput): LocalBusinessLd {
     telephone: siteConfig.phone,
     // No email in JSON-LD — public email is intentionally not surfaced.
     // Leads route to projects@udgok.com via the contact form + /api/leads.
-    image: `${siteConfig.url}/og-default.png`,
+    image: `${siteConfig.url}/opengraph-image`,
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
@@ -73,7 +73,7 @@ export function localBusinessJsonLd(rating?: RatingInput): LocalBusinessLd {
       "Collinsville",
     ],
     openingHours: siteConfig.hours,
-    sameAs: [siteConfig.social.google, siteConfig.social.facebook],
+    sameAs: [siteConfig.social.google, siteConfig.social.facebook].filter(Boolean),
   };
 
   if (rating) {

@@ -1,13 +1,30 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/content";
+import { siteConfig, services, serviceAreas } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: siteConfig.url,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
+  const base = siteConfig.url;
+  const now = new Date();
+
+  const staticPaths = [
+    "",
+    "/services",
+    "/service-areas",
+    "/emergency",
+    "/offers",
+    "/about",
+    "/reviews",
+    "/contact",
+    "/privacy",
+    "/terms",
   ];
+
+  const servicePaths = services.map((s) => `/services/${s.slug}`);
+  const areaPaths = serviceAreas.map((a) => `/service-areas/${a.slug}`);
+
+  return [...staticPaths, ...servicePaths, ...areaPaths].map((path) => ({
+    url: `${base}${path}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: path === "" ? 1 : 0.7,
+  }));
 }
