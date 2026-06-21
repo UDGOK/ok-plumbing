@@ -5,6 +5,7 @@ import { PageScene } from "@/components/motion/page-scene";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { GeoFaq } from "@/components/sections/geo-faq";
+import { LeadForm } from "@/components/contact/lead-form";
 import { siteConfig, formatPhone } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -45,7 +46,7 @@ export default function ContactPage() {
       </section>
 
       <Container className="py-16 md:py-20">
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2 md:items-start">
           <Reveal>
             <div className="flex flex-col gap-3">
               <Button asChild size="lg">
@@ -61,10 +62,7 @@ export default function ContactPage() {
                 </a>
               </Button>
             </div>
-          </Reveal>
-
-          <Reveal index={1}>
-            <ul className="space-y-4 text-foreground-muted">
+            <ul className="mt-8 space-y-4 text-foreground-muted">
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 h-5 w-5 text-brass" />
                 <span>{siteConfig.hours}</span>
@@ -83,10 +81,14 @@ export default function ContactPage() {
               </li>
             </ul>
             <p className="mt-6 text-sm text-foreground-muted">
-              When you call or text, share your address, the service you need,
-              and a one-line description of the problem — photos help us arrive
-              ready.
+              Calling or texting gets the fastest response — a real person
+              answers. Otherwise, send the form and we&apos;ll get right back to
+              you.
             </p>
+          </Reveal>
+
+          <Reveal index={1}>
+            <LeadForm />
           </Reveal>
         </div>
       </Container>

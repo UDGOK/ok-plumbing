@@ -221,3 +221,24 @@ costs API tokens.
 background, an Ask AI + emergency-call CTA band on top, five tidy link columns (Services, Commercial,
 Service Areas, Company, Legal), Google/Facebook/Reviews pills, a legal row, and an oversized "OKPlumb"
 wordmark bleeding off the bottom edge.
+
+---
+
+## Contact form + working /api/leads route
+
+The contact page previously had only call/text buttons, and `/api/leads` existed only in code
+comments — so there was no way to capture a lead that didn't phone in. Added:
+
+- `app/api/leads/route.ts` — validates, drops spam via a hidden honeypot field, and emails the lead
+  to **`LEAD_EMAIL_TO`** (default **projects@udgok.com**) via **Resend**. Every lead is also
+  `console.log`'d as a backstop, so it's recoverable from Vercel logs even if email fails.
+- `components/contact/lead-form.tsx` — a real form (name, phone, email, service, message) on the
+  contact page, beside the existing call/text path.
+
+**Setup:** set **`RESEND_API_KEY`** (resend.com). To send from your own domain, verify
+ok-plumbing.com in Resend and set **`LEAD_EMAIL_FROM`** (e.g. `leads@ok-plumbing.com`); otherwise it
+uses Resend's test sender. `LEAD_EMAIL_TO` defaults to projects@udgok.com.
+
+**Graceful by design:** if the key is missing or a send fails, the form still shows a positive
+confirmation but routes the visitor to **call (918) 851-8203** instead of falsely claiming delivery —
+so a misconfiguration never silently loses a lead. See `.env.example` for all variables.
